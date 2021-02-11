@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
-import { List } from 'react-native-paper';
+import { Card, List } from 'react-native-paper';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableNativeFeedback } from 'react-native-gesture-handler';
 import ChangePassword from './ChangePassword';
 import { useNavigation } from '@react-navigation/native';
 import NamedHeader from '../components/NamedHeader';
-import { ToastAndroid } from 'react-native';
+import { StyleSheet, ToastAndroid, View } from 'react-native';
 import * as firebase from 'firebase';
 
 const Stack = createStackNavigator();
@@ -13,7 +13,7 @@ const Stack = createStackNavigator();
 const ListItemWithRipple = (props) => {
     return (
         <TouchableNativeFeedback onPress={props.onPress}>
-            <List.Item title={props.displayText} />
+            <List.Item style={styles.li} title={props.displayText} />
         </TouchableNativeFeedback>
     );
 };
@@ -40,14 +40,14 @@ const SettingsList = () => {
             });
     const navigation = useNavigation();
     return (
-        <Fragment>
+        <Card style={{ margin: 8 }}>
             <ListItemWithRipple
-                displayText="Change Password"
-                onPress={() => navigation.navigate('ChangePassword')}
+                displayText="Change Hardware Id"
+                onPress={() => navigation.navigate('ChangeHardwareId')}
             />
             <ListItemWithRipple displayText="FAQ" />
             <ListItemWithRipple displayText="Logout" onPress={logoutUser} />
-        </Fragment>
+        </Card>
     );
 };
 
@@ -58,20 +58,27 @@ export default function Setting() {
                 <Stack.Screen
                     name="Setting"
                     component={SettingsList}
-                    initialParams={{ displayName: 'Pre-Set Profile' }}
                     options={{
-                        header: () => NamedHeader({ title: 'Settings' }),
+                        header: () => <NamedHeader title="Settings" />,
                     }}
                 />
                 <Stack.Screen
-                    name="ChangePassword"
+                    name="ChangeHardwareId"
                     component={ChangePassword}
-                    initialParams={{ displayName: 'Pre-Set Profile' }}
                     options={{
-                        header: () => NamedHeader({ title: 'Change Password' }),
+                        header: () => (
+                            <NamedHeader title="Change Hardware Id" />
+                        ),
                     }}
                 />
             </Stack.Navigator>
         </Fragment>
     );
 }
+
+const styles = StyleSheet.create({
+    li: {
+        borderBottomColor: 'gray',
+        borderBottomWidth: 1,
+    },
+});

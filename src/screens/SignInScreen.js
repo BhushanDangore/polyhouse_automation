@@ -20,7 +20,6 @@ export default function App() {
     const sendOTP = async () => {
         try {
             const phoneProvider = new firebase.auth.PhoneAuthProvider();
-            console.log(recaptchaVerifier.current);
             const verificationId = await phoneProvider.verifyPhoneNumber(
                 phoneNumber,
                 recaptchaVerifier.current
@@ -33,7 +32,6 @@ export default function App() {
                 ToastAndroid.BOTTOM
             );
         } catch (err) {
-            console.log(err);
             ToastAndroid.showWithGravity(
                 'Failed to send Verification code. ❌',
                 ToastAndroid.SHORT,

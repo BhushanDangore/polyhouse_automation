@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button, Card, Text } from 'react-native-paper';
+import { Card, Text } from 'react-native-paper';
 
 export default function CurrentStatus() {
     return (
@@ -11,18 +11,12 @@ export default function CurrentStatus() {
                     <Text>Temperature</Text>
                     <View style={styles.rightContent}>
                         <Text style={styles.statusText}>23</Text>
-                        <Button mode="outlined">
-                            <Text>Set</Text>
-                        </Button>
                     </View>
                 </View>
                 <View style={styles.row}>
                     <Text>Humidity</Text>
                     <View style={styles.rightContent}>
                         <Text style={styles.statusText}>23</Text>
-                        <Button mode="outlined">
-                            <Text>Set</Text>
-                        </Button>
                     </View>
                 </View>
             </Card.Content>

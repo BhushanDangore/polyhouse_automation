@@ -1,62 +1,57 @@
 import React from 'react';
-import { Dimensions } from 'react-native';
-import { Card } from 'react-native-paper';
+import { Dimensions, StyleSheet } from 'react-native';
+import { Card, withTheme } from 'react-native-paper';
 import { LineChart } from 'react-native-chart-kit';
 
-export default function TempratureGraph() {
+function ClimateGraph({ theme, title, data, lables }) {
     return (
-        <Card>
-            <Card.Title>Temprature Graph</Card.Title>
-            <LineChart
-                data={{
-                    labels: [
-                        'January',
-                        'February',
-                        'March',
-                        'April',
-                        'May',
-                        'June',
-                    ],
-                    datasets: [
-                        {
-                            data: [
-                                Math.random() * 100,
-                                Math.random() * 100,
-                                Math.random() * 100,
-                                Math.random() * 100,
-                                Math.random() * 100,
-                                Math.random() * 100,
-                            ],
+        <Card style={styles.card}>
+            <Card.Title title={title} titleStyle={styles.title} />
+            <Card.Content style={styles.content}>
+                <LineChart
+                    data={{
+                        labels: lables,
+                        datasets: [
+                            {
+                                data,
+                            },
+                        ],
+                    }}
+                    width={Dimensions.get('window').width - 16}
+                    height={220}
+                    yAxisSuffix="°C"
+                    yAxisInterval={1}
+                    chartConfig={{
+                        backgroundColor: theme.colors.background,
+                        backgroundGradientFromOpacity: 0,
+                        backgroundGradientToOpacity: 0,
+                        decimalPlaces: 2,
+                        color: () => theme.colors.text + '20',
+                        labelColor: () => theme.colors.text + '70',
+                        propsForDots: {
+                            r: '4',
+                            strokeWidth: '1',
+                            stroke: '#ffa726',
                         },
-                    ],
-                }}
-                width={Dimensions.get('window').width}
-                height={220}
-                yAxisLabel="$"
-                yAxisSuffix="k"
-                yAxisInterval={1}
-                chartConfig={{
-                    backgroundColor: '#e26a00',
-                    backgroundGradientFrom: '#ccc',
-                    backgroundGradientTo: '#bbb',
-                    decimalPlaces: 2,
-                    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-                    labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-                    style: {
-                        borderRadius: 16,
-                    },
-                    propsForDots: {
-                        r: '6',
-                        strokeWidth: '2',
-                        stroke: '#ffa726',
-                    },
-                }}
-                bezier
-                style={{
-                    marginVertical: 8,
-                    borderRadius: 16,
-                }}
-            />
+                    }}
+                    bezier
+                />
+            </Card.Content>
         </Card>
     );
 }
+
+const styles = StyleSheet.create({
+    card: { margin: 8 },
+    title: {
+        alignSelf: 'center',
+        borderBottomWidth: 1,
+    },
+    content: {
+        margin: 0,
+        paddingHorizontal: 0,
+        paddingBottom: 0,
+    },
+});
+
+export default withTheme(ClimateGraph);
