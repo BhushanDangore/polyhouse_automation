@@ -1,4 +1,4 @@
-package com.polyhouseautomator;
+package com.bhushandangore.newProject;
 
 import android.app.Application;
 import android.content.Context;
@@ -6,13 +6,12 @@ import android.net.Uri;
 
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
-import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import com.polyhouseautomator.generated.BasePackageList;
+import com.bhushandangore.newProject.generated.BasePackageList;
 
 import org.unimodules.adapters.react.ReactAdapterPackage;
 import org.unimodules.adapters.react.ModuleRegistryAdapter;
@@ -29,6 +28,10 @@ import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nullable;
 
+// Following imports are to avoid react native errors
+import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
+import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
+
 public class MainApplication extends Application implements ReactApplication {
   private final ReactModuleRegistryProvider mModuleRegistryProvider = new ReactModuleRegistryProvider(
     new BasePackageList().getPackageList()
@@ -43,7 +46,11 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       List<ReactPackage> packages = new PackageList(this).getPackages();
+      
+      // Packages that cannot be autolinked yet can be added manually here
       packages.add(new ModuleRegistryAdapter(mModuleRegistryProvider));
+      packages.add(new RNFirebaseMessagingPackage());
+      packages.add(new RNFirebaseNotificationsPackage());
       return packages;
     }
 
