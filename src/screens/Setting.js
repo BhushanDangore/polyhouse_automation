@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Card, List } from 'react-native-paper';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableNativeFeedback } from 'react-native-gesture-handler';
-import ChangePassword from './ChangePassword';
+import ChangeHardwareId from './ChangeHardwareId';
 import { useNavigation } from '@react-navigation/native';
 import NamedHeader from '../components/NamedHeader';
 import { StyleSheet, ToastAndroid, View } from 'react-native';
@@ -19,7 +19,7 @@ const ListItemWithRipple = (props) => {
 };
 
 const SettingsList = () => {
-    const logoutUser = () =>
+    const logoutUser = () => {
         firebase
             .auth()
             .signOut()
@@ -38,6 +38,7 @@ const SettingsList = () => {
                     ToastAndroid.BOTTOM
                 );
             });
+    };
     const navigation = useNavigation();
     return (
         <Card style={{ margin: 8 }}>
@@ -64,7 +65,7 @@ export default function Setting() {
                 />
                 <Stack.Screen
                     name="ChangeHardwareId"
-                    component={ChangePassword}
+                    component={ChangeHardwareId}
                     options={{
                         header: () => (
                             <NamedHeader title="Change Hardware Id" />

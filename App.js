@@ -11,6 +11,7 @@ import {
     NavigationContainer,
     DarkTheme as NavigationDarkTheme,
 } from '@react-navigation/native';
+import { YellowBox } from 'react-native';
 
 import './Database';
 import themeGenerator from './src/utils/theme-generator';
@@ -18,6 +19,8 @@ import SignInScreen from './src/screens/SignInScreen';
 import Main from './src/Main';
 
 const Stack = createStackNavigator();
+
+YellowBox.ignoreWarnings(['Setting a timer']);
 
 export default function App() {
     const [state, setState] = useState({ loading: true });
@@ -31,7 +34,7 @@ export default function App() {
             });
         }
         firebase.auth().onAuthStateChanged((user) => {
-            if (user != null) {
+            if (user) {
                 setState({ loading: false, signedIn: true, user });
                 return;
             }

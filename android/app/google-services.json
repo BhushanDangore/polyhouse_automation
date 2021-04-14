@@ -1,40 +1,40 @@
 {
-    "project_info": {
-        "project_number": "917867841937",
-        "firebase_url": "https://polyhouseautomation-aa1ce.firebaseio.com",
-        "project_id": "polyhouseautomation-aa1ce",
-        "storage_bucket": "polyhouseautomation-aa1ce.appspot.com"
-    },
-    "client": [
-        {
-            "client_info": {
-                "mobilesdk_app_id": "1:917867841937:android:e697881050f959cd473230",
-                "android_client_info": {
-                    "package_name": "com.student.polyhouseAutomation"
-                }
-            },
-            "oauth_client": [
-                {
-                    "client_id": "917867841937-qc4piadvjbjt47snv3bci65v85hjdbji.apps.googleusercontent.com",
-                    "client_type": 3
-                }
-            ],
-            "api_key": [
-                {
-                    "current_key": "AIzaSyATwV6xDFZChWtDMrShlentkBs27bckEog"
-                }
-            ],
-            "services": {
-                "appinvite_service": {
-                    "other_platform_oauth_client": [
-                        {
-                            "client_id": "917867841937-qc4piadvjbjt47snv3bci65v85hjdbji.apps.googleusercontent.com",
-                            "client_type": 3
-                        }
-                    ]
-                }
-            }
+  "project_info": {
+    "project_number": "917867841937",
+    "firebase_url": "https://polyhouseautomation-aa1ce.firebaseio.com",
+    "project_id": "polyhouseautomation-aa1ce",
+    "storage_bucket": "polyhouseautomation-aa1ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:917867841937:android:a41cca00bc6aead1473230",
+        "android_client_info": {
+          "package_name": "com.polyhouseautomator"
         }
-    ],
-    "configuration_version": "1"
+      },
+      "oauth_client": [
+        {
+          "client_id": "917867841937-qc4piadvjbjt47snv3bci65v85hjdbji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATwV6xDFZChWtDMrShlentkBs27bckEog"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "917867841937-qc4piadvjbjt47snv3bci65v85hjdbji.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
 }
