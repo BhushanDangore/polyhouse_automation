@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Card, Text } from 'react-native-paper';
 
-export default function CurrentStatus() {
+export default function CurrentStatus({ temperature, humidity }) {
     return (
         <Card style={styles.card}>
             <Card.Title title="Current Status" titleStyle={styles.title} />
@@ -10,13 +10,17 @@ export default function CurrentStatus() {
                 <View style={styles.row}>
                     <Text>Temperature</Text>
                     <View style={styles.rightContent}>
-                        <Text style={styles.statusText}>23</Text>
+                        <Text style={styles.statusText}>
+                            {temperature ? temperature + '°C' : '-'}
+                        </Text>
                     </View>
                 </View>
                 <View style={styles.row}>
                     <Text>Humidity</Text>
                     <View style={styles.rightContent}>
-                        <Text style={styles.statusText}>23</Text>
+                        <Text style={styles.statusText}>
+                            {humidity ? humidity + '%' : '-'}
+                        </Text>
                     </View>
                 </View>
             </Card.Content>

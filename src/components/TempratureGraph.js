@@ -3,7 +3,7 @@ import { Dimensions, StyleSheet } from 'react-native';
 import { Card, withTheme } from 'react-native-paper';
 import { LineChart } from 'react-native-chart-kit';
 
-function ClimateGraph({ theme, title, data, lables }) {
+function ClimateGraph({ theme, title, data, lables, yAxisSuffix }) {
     return (
         <Card style={styles.card}>
             <Card.Title title={title} titleStyle={styles.title} />
@@ -19,8 +19,8 @@ function ClimateGraph({ theme, title, data, lables }) {
                     }}
                     width={Dimensions.get('window').width - 16}
                     height={220}
-                    yAxisSuffix="°C"
-                    yAxisInterval={1}
+                    yAxisSuffix={yAxisSuffix || '°C'}
+                    yAxisInterval={0.5}
                     chartConfig={{
                         backgroundColor: theme.colors.background,
                         backgroundGradientFromOpacity: 0,

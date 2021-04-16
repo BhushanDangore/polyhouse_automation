@@ -21,28 +21,25 @@ export default function ChangePassword() {
     }, []);
 
     const saveHardwareID = async () => {
-        if (!userID) {
-            console.log('ID not avalable');
-            return;
-        }
+        if (!userID) return;
         firestore
             .collection('hardwares')
-            .doc(userID)
+            .doc(hardwareId)
             .get()
             .then((doc) => {
-                const _hID = doc.get('hardwareId');
-                if (_hID) {
-                    if (_hID === hardwareId) {
-                        throw new Error(
-                            'You already have the same Hardware ID'
-                        );
-                    }
-                    throw new Error('You already have hardware connected');
+                const isUsed = doc.get('isUsed');
+                if (isUsed) {
+                    throw new Error('Invalid Hardware ID');
                 }
-                return firestore.collection('hardwares').doc(userID).set({
-                    hardwareId: hardwareId,
-                    userId: userID,
-                });
+                return Promise.all([
+                    firestore.collection('hardwares').doc(hardwareId).set({
+                        userId: userID,
+                        isUsed: true,
+                    }),
+                    firestore.collection('users').doc(userID).set({
+                        hardwareId: hardwareId,
+                    }),
+                ]);
             })
             .then(() => {
                 ToastAndroid.showWithGravity(
