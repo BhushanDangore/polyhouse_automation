@@ -5,7 +5,7 @@ import firebase from 'firebase';
 
 import NamedHeader from '../components/NamedHeader';
 import NumberSelectDialog from '../components/NumberSelectDialog';
-import { filterDripsArray, getDripStatus } from '../utils/drip';
+import { getDripStatus } from '../utils/drip';
 
 const initialSlectNumberDialogState = {
     open: false,
@@ -23,7 +23,7 @@ export default function Actions() {
         initialSlectNumberDialogState
     );
 
-    const [drips, setDrips] = useState([]);
+    const [drips, setDrips] = useState();
 
     const userID = firebase.auth().currentUser.uid;
 
@@ -32,7 +32,7 @@ export default function Actions() {
             const snap = snapshot.val();
             setTemperature(snap.temperature);
             setHumidity(snap.humidity);
-            setDrips(filterDripsArray(snap.drip));
+            setDrips(Object.values(snap.drip));
             setActiveDrips(getDripStatus(snap.drip));
         });
     }, []);

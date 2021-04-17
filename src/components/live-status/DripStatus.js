@@ -3,8 +3,6 @@ import firebase from 'firebase';
 import { StyleSheet, View } from 'react-native';
 import { Card, Text } from 'react-native-paper';
 
-import { filterDripsArray } from '../../utils/drip';
-
 const database = firebase.database();
 
 const getRunningTime = (_startTime) => {
@@ -36,7 +34,7 @@ export default function DripStatus() {
                 return;
             }
             const snap = snapshot.val();
-            setDrips(filterDripsArray(snap));
+            setDrips(Object.values(snap));
         });
     }, []);
 
@@ -57,46 +55,40 @@ export default function DripStatus() {
 
     let cardContent;
 
-    switch (state?.length) {
-        case undefined:
-            cardContent = <Text>Loading...</Text>;
-            break;
-
-        case 0:
-            cardContent = <Text>Drip systems are turned off.</Text>;
-            break;
-
-        default:
-            cardContent = state.map((drip, idx) => (
-                <View key={idx} style={styles.bottomBorder}>
-                    <Text style={styles.dripNumber}>
-                        Drip Number {drip.dripNumber}
-                    </Text>
-                    <View style={styles.row}>
-                        <Text>Running time</Text>
-                        <View style={styles.rightContent}>
-                            <Text style={styles.statusText}>
-                                {drip.runningTime ? drip.runningTime : '-'}
-                            </Text>
-                        </View>
-                    </View>
-                    <View style={styles.row}>
-                        <Text>Water Level</Text>
-                        <View style={styles.rightContent}>
-                            <Text style={styles.statusText}>
-                                {drip.waterLevel ? drip.waterLevel + '%' : '-'}
-                            </Text>
-                        </View>
+    if (!drips) {
+        cardContent = <Text>Loading...</Text>;
+    } else if (!state) {
+        cardContent = <Text>Looking for live status.</Text>;
+    } else if (state === false) {
+        cardContent = (
+            <Text>Configuration is not done please check settings.</Text>
+        );
+    } else if (state.length === 0)
+        cardContent = <Text>All drip systems are turned off.</Text>;
+    else if (state.length)
+        cardContent = state.map((drip, idx) => (
+            <View key={idx} style={styles.bottomBorder}>
+                <Text style={styles.dripNumber}>
+                    Drip Number {drip.dripNumber}
+                </Text>
+                <View style={styles.row}>
+                    <Text>Running time</Text>
+                    <View style={styles.rightContent}>
+                        <Text style={styles.statusText}>
+                            {drip.runningTime ? drip.runningTime : '-'}
+                        </Text>
                     </View>
                 </View>
-            ));
-    }
-
-    if (state === false) {
-        cardContent = (
-            <Text>Configuration is not done please check settings</Text>
-        );
-    }
+                <View style={styles.row}>
+                    <Text>Water Level</Text>
+                    <View style={styles.rightContent}>
+                        <Text style={styles.statusText}>
+                            {drip.waterLevel ? drip.waterLevel + '%' : '-'}
+                        </Text>
+                    </View>
+                </View>
+            </View>
+        ));
 
     return (
         <Card style={styles.card}>
